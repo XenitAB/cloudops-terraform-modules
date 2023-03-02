@@ -29,6 +29,13 @@ unzip tflint_linux_amd64.zip
 mv tflint /usr/bin/tflint
 ```
 
+Install tflint ruleset for azure
+
+```shell
+cd modules/azure
+tflint --init
+```
+
 ### tfsec
 
 ```shell
