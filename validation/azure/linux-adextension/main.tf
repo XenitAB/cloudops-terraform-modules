@@ -42,9 +42,4 @@ module "linux_adextension" {
 
   subnet_id = "value"
 
-  core_config = {
-    common_name = "core"
-    subnet_name = "servers"
-  }
-
 }

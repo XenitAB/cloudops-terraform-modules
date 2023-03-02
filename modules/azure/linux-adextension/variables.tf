@@ -23,22 +23,12 @@ variable "vm_config" {
 }
 
 variable "rg_name" {
-  description = ""
+  description = "The name of the Resource Group"
   type        = string
 }
 
 variable "rg_location" {
-  description = ""
-  type        = string
-}
-
-variable "common_name" {
-  description = "The commonName to use for the deploy"
-  type        = string
-}
-
-variable "common_name_short" {
-  description = "Short commonName to use as VM hostname"
+  description = "The location of the Resource Group"
   type        = string
 }
 
