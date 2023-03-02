@@ -6,7 +6,7 @@ data "azurerm_resource_group" "rg" {
 data "azurerm_resource_group" "rg_core" {
   name = "rg-${var.environment}-${var.location_short}-${var.core_config.common_name}"
 }
-*/
+
 resource "random_password" "vm_password" {
   count   = var.vm_config.count
   length  = 16
@@ -40,7 +40,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   resource_group_name             = var.rg_name
   size                            = var.vm_config.size
   admin_username                  = var.vm_config.username
-  admin_password                  = random_password.vm_password[count.index].result
+# admin_password                  = random_password.vm_password[count.index].result
   disable_password_authentication = true
 
   network_interface_ids = [
