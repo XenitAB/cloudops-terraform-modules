@@ -72,6 +72,6 @@ variable "core_config" {
 
 variable "subnet_id" {
   description = "Subnet where the VM recide in"
-  type = string
+  type        = string
 
 }
