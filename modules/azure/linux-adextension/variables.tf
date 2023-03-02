@@ -27,11 +27,6 @@ variable "rg_name" {
   type        = string
 }
 
-variable "rg_location" {
-  description = "The location of the Resource Group"
-  type        = string
-}
-
 variable "location" {
   description = "The Azure region to create things in."
   type        = string

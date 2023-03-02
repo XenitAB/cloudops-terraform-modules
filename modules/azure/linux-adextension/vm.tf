@@ -36,7 +36,7 @@ locals {
 resource "azurerm_linux_virtual_machine" "vm" {
   count                           = var.vm_config.count
   name                            = var.vm_config.name
-  location                        = var.rg_location
+  location                        = var.location
   resource_group_name             = var.rg_name
   size                            = var.vm_config.size
   admin_username                  = var.vm_config.username
