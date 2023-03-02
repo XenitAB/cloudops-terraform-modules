@@ -69,7 +69,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
 resource "azurerm_network_interface" "nic" {
   count               = var.vm_config.count
   name                = var.vm_config.nic_name
-  location            = var.rg_location
+  location            = var.location
   resource_group_name = var.rg_name
 
   ip_configuration {

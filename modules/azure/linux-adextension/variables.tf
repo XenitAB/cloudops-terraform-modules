@@ -32,29 +32,6 @@ variable "location" {
   type        = string
 }
 
-variable "location_short" {
-  description = "The Azure region short name."
-  type        = string
-}
-
-variable "environment" {
-  description = "The environment of the Azure resource, prod, test, uat."
-  type        = string
-}
-
-variable "environment_short" {
-  description = "The environment of the Azure resource, p = prod, t = test u = uat."
-  type        = string
-}
-
-variable "core_config" {
-  description = "The configuration of the core infra"
-  type = object({
-    common_name = string
-    subnet_name = string
-  })
-}
-
 variable "subnet_id" {
   description = "Subnet where the VM recide in"
   type        = string
