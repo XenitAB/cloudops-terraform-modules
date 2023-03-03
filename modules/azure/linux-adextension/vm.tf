@@ -1,37 +1,3 @@
-/*# Add datasource for resource group
-data "azurerm_resource_group" "rg" {
-  name = "rg-${var.environment}-${var.location_short}-${var.common_name}"
-}
-
-data "azurerm_resource_group" "rg_core" {
-  name = "rg-${var.environment}-${var.location_short}-${var.core_config.common_name}"
-}
-
-resource "random_password" "vm_password" {
-  count   = var.vm_config.count
-  length  = 16
-  special = true
-
-  keepers = {
-    vmPassword = var.vm_config.name
-
-  }
-}
-
-/*
-resource "azurerm_key_vault_secret" "vm_password" {
-  count        = var.vm_config.count
-  name         = "${local.vm_base_name}-${format("%02s", count.index + 1)}"
-  value        = random_password.vm_password[count.index].result
-  key_vault_id = data.azurerm_key_vault.kv.id
-}
-
-locals {
-  vm_base_name      = "${var.environment_short}-${var.location_short}-${var.common_name_short}"
-  vm_base_host_name = "${var.environment_short}-${var.location_short}-${var.common_name_short}"
-  
-}
-*/
 resource "tls_private_key" "ssh_admin_key" {
   algorithm = "RSA"
   rsa_bits  = "4096"
@@ -39,7 +5,7 @@ resource "tls_private_key" "ssh_admin_key" {
 
 #tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "ssh_admin_key_secret" {
-  name         = "ssh_admin_key_secret"
+  name         = "ssh-admin-key-secret"
   value        = tls_private_key.ssh_admin_key
   key_vault_id = var.key_vault_id
   content_type = "x509"
