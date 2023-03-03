@@ -40,16 +40,17 @@ resource "tls_private_key" "ssh_admin_key" {
 resource "azurerm_key_vault_secret" "ssh_admin_key_secret" {
   name                = "ssh_admin_key_secret"
   value               = tls_private_key.ssh_admin_key
-  key_vault_id        = 
+  key_vault_id        = azurerm_resource_group.ssh_admin_key_secret_keyvault
+  content_type        = "sshlogin" 
 
 }
 
 resource "azurerm_resource_group" "ssh_admin_key_secret_keyvault" {
-  name                = var.kv_name
+  name                = var.rg_name_kv
   location            = var.location
   
 }
-
+  
 resource "azurerm_linux_virtual_machine" "vm" {
   count                           = var.vm_config.count
   name                            = var.vm_config.name
@@ -59,7 +60,6 @@ resource "azurerm_linux_virtual_machine" "vm" {
   admin_username                  = var.vm_config.username
   disable_password_authentication = true
 # admin_password                  = random_password.vm_password[count.index].result
-
   admin_ssh_key {
     public_key                    = tls_private_key.ssh_admin.public_key_pem
     username                      = var.vm_config.username
