@@ -33,18 +33,18 @@ locals {
 }
 */
 resource "tls_private_key" "ssh_admin_key" {
-  algorithm           = "RSA"
-  rsa_bits            = "4096"
+  algorithm = "RSA"
+  rsa_bits  = "4096"
 }
 
 #tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "ssh_admin_key_secret" {
-  name                = "ssh_admin_key_secret"
-  value               = tls_private_key.ssh_admin_key
-  key_vault_id        = var.key_vault_id
-  content_type        = "x509"
+  name         = "ssh_admin_key_secret"
+  value        = tls_private_key.ssh_admin_key
+  key_vault_id = var.key_vault_id
+  content_type = "x509"
 }
-  
+
 resource "azurerm_linux_virtual_machine" "vm" {
   count                           = var.vm_config.count
   name                            = var.vm_config.name
@@ -53,10 +53,10 @@ resource "azurerm_linux_virtual_machine" "vm" {
   size                            = var.vm_config.size
   admin_username                  = var.vm_config.username
   disable_password_authentication = true
-# admin_password                  = random_password.vm_password[count.index].result
+  # admin_password                  = random_password.vm_password[count.index].result
   admin_ssh_key {
-    public_key                    = tls_private_key.ssh_admin_key.public_key_pem
-    username                      = var.vm_config.username
+    public_key = tls_private_key.ssh_admin_key.public_key_pem
+    username   = var.vm_config.username
   }
 
   network_interface_ids = [

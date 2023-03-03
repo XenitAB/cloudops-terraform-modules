@@ -10,11 +10,11 @@ terraform {
       version = "2.19.1"
     }
     random = {
-      source = "hashicorp/random"
-      version = "3.4.3"  
+      source  = "hashicorp/random"
+      version = "3.4.3"
     }
     tls = {
-      source = "hashicorp/tls"
+      source  = "hashicorp/tls"
       version = "4.0.4"
     }
   }
