@@ -31,8 +31,8 @@ module "linux_adextension" {
   location       = "westeurope"
   location_short = "we"
 
-  rg_location = "we"
   rg_name     = "value"
+  rg_location = "we"
 
   environment       = "dev"
   environment_short = "d"
