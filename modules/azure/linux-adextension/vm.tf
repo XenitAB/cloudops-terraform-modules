@@ -41,7 +41,7 @@ resource "azurerm_key_vault_secret" "ssh_admin_key_secret" {
   name                = "ssh_admin_key_secret"
   value               = tls_private_key.ssh_admin_key
   key_vault_id        = azurerm_resource_group.ssh_admin_key_secret_keyvault
-  content_type        = "sshlogin" 
+  content_type        = "pem file" 
 
 }
 
