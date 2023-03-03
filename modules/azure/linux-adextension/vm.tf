@@ -59,7 +59,6 @@ resource "azurerm_linux_virtual_machine" "vm" {
     username                      = var.vm_config.username
   }
 
-
   network_interface_ids = [
     azurerm_network_interface.nic[count.index].id
   ]
