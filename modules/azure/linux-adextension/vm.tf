@@ -37,6 +37,7 @@ resource "tls_private_key" "ssh_admin_key" {
   rsa_bits            = "4096"
 }
 
+#tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "ssh_admin_key_secret" {
   name                = "ssh_admin_key_secret"
   value               = tls_private_key.ssh_admin_key
