@@ -6,7 +6,7 @@ resource "tls_private_key" "ssh_admin_key" {
 #tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "ssh_admin_key_secret" {
   name         = "${var.vm_config.name}-private-ssh"
-  value        = tls_private_key.ssh_admin_key
+  value        = jsonencode(tls_private_key.ssh_admin_key)
   key_vault_id = var.key_vault_id
   content_type = "x509"
 }
