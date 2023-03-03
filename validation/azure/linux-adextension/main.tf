@@ -28,18 +28,11 @@ module "linux_adextension" {
     username = "value"
   }
 
-  location       = "westeurope"
-  location_short = "we"
+  location = "westeurope"
 
-  rg_name     = "value"
-  rg_location = "we"
-
-  environment       = "dev"
-  environment_short = "d"
-
-  common_name       = "name"
-  common_name_short = "n"
+  rg_name = "rg-we-linux-foundation"
 
   subnet_id = "value"
 
+  key_vault_id = "value"
 }
