@@ -32,9 +32,22 @@ locals {
   
 }
 */
-resource "tls_private_key" "ssh_admin" {
-  algorithm = "RSA"
-  rsa_bits  = "4096"
+resource "tls_private_key" "ssh_admin_key" {
+  algorithm           = "RSA"
+  rsa_bits            = "4096"
+}
+
+resource "azurerm_key_vault_secret" "ssh_admin_key_secret" {
+  name                = "ssh_admin_key_secret"
+  value               = tls_private_key.ssh_admin_key
+  key_vault_id        = 
+
+}
+
+resource "azurerm_resource_group" "ssh_admin_key_secret_keyvault" {
+  name                = var.kv_name
+  location            = var.location
+  
 }
 
 resource "azurerm_linux_virtual_machine" "vm" {
@@ -48,9 +61,10 @@ resource "azurerm_linux_virtual_machine" "vm" {
 # admin_password                  = random_password.vm_password[count.index].result
 
   admin_ssh_key {
-    public_key                    = tls_private_key.ssh_admin.private_key_pem
+    public_key                    = tls_private_key.ssh_admin.public_key_pem
     username                      = var.vm_config.username
   }
+
 
   network_interface_ids = [
     azurerm_network_interface.nic[count.index].id
