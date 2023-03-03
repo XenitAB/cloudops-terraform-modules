@@ -41,15 +41,8 @@ resource "tls_private_key" "ssh_admin_key" {
 resource "azurerm_key_vault_secret" "ssh_admin_key_secret" {
   name                = "ssh_admin_key_secret"
   value               = tls_private_key.ssh_admin_key
-  key_vault_id        = azurerm_resource_group.ssh_admin_key_secret_keyvault
-  content_type        = "pem file" 
-
-}
-
-resource "azurerm_resource_group" "ssh_admin_key_secret_keyvault" {
-  name                = var.rg_name_kv
-  location            = var.location
-  
+  key_vault_id        = var.key_vault_id
+  content_type        = "x509"
 }
   
 resource "azurerm_linux_virtual_machine" "vm" {
@@ -62,7 +55,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   disable_password_authentication = true
 # admin_password                  = random_password.vm_password[count.index].result
   admin_ssh_key {
-    public_key                    = tls_private_key.ssh_admin.public_key_pem
+    public_key                    = tls_private_key.ssh_admin_key.public_key_pem
     username                      = var.vm_config.username
   }
 

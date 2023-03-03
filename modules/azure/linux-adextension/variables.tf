@@ -28,12 +28,18 @@ variable "rg_name" {
 }
 
 variable "location" {
-  description = "The Azure region to create things in."
+  description = "The Azure region to create things in"
   type        = string
 }
 
 variable "subnet_id" {
-  description = "Subnet where the VM recide in"
+  description = "Subnet where the VM resides"
+  type        = string
+
+}
+
+variable "key_vault_id" {
+  description = "The key vault id"
   type        = string
 
 }
