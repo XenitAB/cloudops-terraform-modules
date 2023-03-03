@@ -44,13 +44,13 @@ resource "azurerm_linux_virtual_machine" "vm" {
   resource_group_name             = var.rg_name
   size                            = var.vm_config.size
   admin_username                  = var.vm_config.username
+  disable_password_authentication = true
 # admin_password                  = random_password.vm_password[count.index].result
 
   admin_ssh_key {
     public_key                    = tls_private_key.ssh_admin.private_key_pem
     username                      = var.vm_config.username
   }
-  disable_password_authentication = true
 
   network_interface_ids = [
     azurerm_network_interface.nic[count.index].id
