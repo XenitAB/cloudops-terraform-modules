@@ -2,7 +2,6 @@
 variable "vm_config" {
   description = "Configuration of the virtual machines"
   type = object({
-    count    = number
     name     = string
     username = string
     size     = string
