@@ -36,7 +36,7 @@ No modules.
 | <a name="input_location"></a> [location](#input\_location) | The Azure region to create things in | `string` | n/a | yes |
 | <a name="input_rg_name"></a> [rg\_name](#input\_rg\_name) | The name of the Resource Group | `string` | n/a | yes |
 | <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | Subnet where the VM resides | `string` | n/a | yes |
-| <a name="input_vm_config"></a> [vm\_config](#input\_vm\_config) | Configuration of the virtual machines | <pre>object({<br>    count    = number<br>    name     = string<br>    username = string<br>    size     = string<br>    nic_name = string<br>    sourceImageReference = object({<br>      publisher = string<br>      offer     = string<br>      sku       = string<br>      version   = string<br>    })<br>    storageOsDisk = object({<br>      name                 = string<br>      caching              = string<br>      disk_size_gb         = string<br>      storage_account_type = string<br>    })<br>  })</pre> | n/a | yes |
+| <a name="input_vm_config"></a> [vm\_config](#input\_vm\_config) | Configuration of the virtual machines | <pre>object({<br>    name     = string<br>    username = string<br>    size     = string<br>    nic_name = string<br>    sourceImageReference = object({<br>      publisher = string<br>      offer     = string<br>      sku       = string<br>      version   = string<br>    })<br>    storageOsDisk = object({<br>      name                 = string<br>      caching              = string<br>      disk_size_gb         = string<br>      storage_account_type = string<br>    })<br>  })</pre> | n/a | yes |
 
 ## Outputs
 
