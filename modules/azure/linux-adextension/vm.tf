@@ -6,13 +6,13 @@ resource "tls_private_key" "ssh_admin_key" {
 #tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "ssh_admin_key_secret" {
   name         = "${var.vm_config.name}-private-ssh"
-  value        = jsonencode(tls_private_key.ssh_admin_key.private_key_openssh)
+  value        = trimspace(tls_private_key.ssh_admin_key.private_key_openssh)
   key_vault_id = var.key_vault_id
   content_type = "x509"
 }
 
 resource "azurerm_network_interface" "nic" {
-  count = var.vm_config.count
+  count               = var.vm_config.count
   name                = lower("${var.vm_config.name}-${format("%02s", count.index + 1)}")
   location            = var.location
   resource_group_name = var.rg_name
@@ -33,8 +33,8 @@ resource "azurerm_linux_virtual_machine" "vm" {
   admin_username                  = var.vm_config.username
   disable_password_authentication = true
   admin_ssh_key {
-    public_key = tls_private_key.ssh_admin_key.public_key_openssh
-    username   = var.vm_config.username
+    public_key                    = tls_private_key.ssh_admin_key.public_key_openssh
+    username                      = var.vm_config.username
   }
 
   network_interface_ids = [
@@ -53,8 +53,8 @@ resource "azurerm_linux_virtual_machine" "vm" {
   }
 
   os_disk {
-    caching              = var.vm_config.storageOsDisk.caching
-    storage_account_type = var.vm_config.storageOsDisk.storage_account_type
+    caching              = var.vm_config.storage_os_disk.caching
+    storage_account_type = var.vm_config.storage_os_disk.storage_account_type
 
   }
   disk_size_gb  = var.vm_config.storage_os_disk.size_gb
