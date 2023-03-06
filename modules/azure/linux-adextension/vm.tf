@@ -6,13 +6,14 @@ resource "tls_private_key" "ssh_admin_key" {
 #tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "ssh_admin_key_secret" {
   name         = "${var.vm_config.name}-private-ssh"
-  value        = jsonencode(tls_private_key.ssh_admin_key.private_key_pem)
+  value        = jsonencode(tls_private_key.ssh_admin_key.private_key_openssh)
   key_vault_id = var.key_vault_id
   content_type = "x509"
 }
 
 resource "azurerm_network_interface" "nic" {
-  name                = var.vm_config.nic_name
+  count = var.vm_config.count
+  name                = lower("${var.vm_config.name}-${format("%02s", count.index + 1)}")
   location            = var.location
   resource_group_name = var.rg_name
 
@@ -24,7 +25,8 @@ resource "azurerm_network_interface" "nic" {
 }
 
 resource "azurerm_linux_virtual_machine" "vm" {
-  name                            = var.vm_config.name
+  count                           = var.vm_config.count
+  name                            = lower("${var.vm_config.name}-${format("%02s", count.index + 1)}")
   location                        = var.location
   resource_group_name             = var.rg_name
   size                            = var.vm_config.size
@@ -36,7 +38,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   }
 
   network_interface_ids = [
-    azurerm_network_interface.nic.id
+    azurerm_network_interface.nic[count.index].id
   ]
 
   identity {
@@ -44,16 +46,16 @@ resource "azurerm_linux_virtual_machine" "vm" {
   }
 
   source_image_reference {
-    publisher = var.vm_config.sourceImageReference.publisher
-    offer     = var.vm_config.sourceImageReference.offer
-    sku       = var.vm_config.sourceImageReference.sku
-    version   = var.vm_config.sourceImageReference.version
+    publisher = var.vm_config.source_image_reference.publisher
+    offer     = var.vm_config.source_image_reference.offer
+    sku       = var.vm_config.source_image_reference.sku
+    version   = var.vm_config.source_image_reference.version
   }
 
   os_disk {
-    name                 = var.vm_config.storageOsDisk.name
     caching              = var.vm_config.storageOsDisk.caching
     storage_account_type = var.vm_config.storageOsDisk.storage_account_type
 
   }
+  disk_size_gb  = var.vm_config.storage_os_disk.size_gb
 }

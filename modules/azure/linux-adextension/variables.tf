@@ -3,19 +3,18 @@ variable "vm_config" {
   description = "Configuration of the virtual machines"
   type = object({
     name     = string
+    count    = number
     username = string
     size     = string
-    nic_name = string
-    sourceImageReference = object({
+    source_image_reference = object({
       publisher = string
       offer     = string
       sku       = string
       version   = string
     })
-    storageOsDisk = object({
-      name                 = string
+    storage_os_disk = object({
       caching              = string
-      disk_size_gb         = string
+      disk_size_gb         = optional(string)
       storage_account_type = string
     })
   })
