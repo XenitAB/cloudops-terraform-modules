@@ -55,7 +55,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   os_disk {
     caching              = var.vm_config.storage_os_disk.caching
     storage_account_type = var.vm_config.storage_os_disk.storage_account_type
-    disk_size_gb         = var.vm_config.storage_os_disk.size_gb
+    disk_size_gb         = var.vm_config.storage_os_disk.disk_size_gb
   }
 
 }
