@@ -18,7 +18,7 @@ resource "azurerm_network_interface" "nic" {
   resource_group_name = var.rg_name
 
   ip_configuration {
-    name                          = "private-ip-${format("%02s", count.index + 1)}")
+    name                          = "private-ip-${format("%02s", count.index + 1)}"
     subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Dynamic"
   }
