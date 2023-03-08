@@ -1,3 +1,4 @@
+/*
 resource "azurerm_key_vault "breakglass_admin_keys" {
   name                = lower("kv-("${var.vm_config.name}")-bg")
   location            = var.vm_config.location
@@ -8,6 +9,7 @@ resource "azurerm_key_vault "breakglass_admin_keys" {
   soft_delete_retention_days  = 90
 }
 
+*/
 resource "tls_private_key" "ssh_admin_key" {
   algorithm = "RSA"
   rsa_bits  = "4096"
