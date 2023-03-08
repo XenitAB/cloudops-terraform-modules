@@ -1,7 +1,3 @@
-variable "common_name" {
-  description = "The common name for this deployment"
-  type        = string
-}
 
 variable "location" {
   description = "The Azure region name"
@@ -18,10 +14,6 @@ variable "environment" {
   type        = string
 }
 
-variable "unique_suffix" {
-  description = "Unique suffix that is used in globally unique resources names"
-  type        = string
-}
 
 variable "vm_config" {
   description = "Configuration of the virtual machines"
