@@ -9,7 +9,7 @@ provider "azuread" {}
 module "linux_adextension" {
   source = "../../../modules/azure/linux-adextension"
   vm_config = {
-    name     = "linuxserver"
+    name     = "value"
     size     = "value"
     nic_name = "value"
     sourceImageReference = {
