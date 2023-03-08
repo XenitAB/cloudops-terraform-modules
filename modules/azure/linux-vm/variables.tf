@@ -23,37 +23,24 @@ variable "unique_suffix" {
   type        = string
 }
 
-variable "vm_count" {
-  description = "Count index"
-  type        = number
-}
-
 variable "vm_config" {
   description = "Configuration of the virtual machines"
-  type = object({
-    username             = string
-    size                 = string
-    publisher            = string
-    offer                = string
-    sku                  = string
-    version              = string
-    caching              = string
-    disk_size_gb         = optional(string)
-    storage_account_type = string
-  })
-}
-variable "nic_name" {
-  description = "The name of the Network Interface"
-  type        = string
-}
-
-variable "rg_name" {
-  description = "The name of the Resource Group"
-  type        = string
-}
-
-variable "subnet_id" {
-  description = "Subnet where the VM resides"
-  type        = string
-
+  type = list(
+    object({
+      name                 = string
+      username             = string
+      size                 = string
+      publisher            = string
+      offer                = string
+      sku                  = string
+      version              = string
+      caching              = string
+      disk_size_gb         = optional(string)
+      storage_account_type = string
+      nic_name             = string
+      subnet_id            = string
+      rg_name              = string
+      key_vault_id         = string
+    })
+  )
 }
