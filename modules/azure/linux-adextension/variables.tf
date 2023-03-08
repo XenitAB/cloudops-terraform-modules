@@ -14,7 +14,7 @@ variable "vm_config" {
     })
     storage_os_disk = object({
       caching              = string
-      disk_size_gb         = optional(string)
+      disk_size_gb         = number
       storage_account_type = string
     })
   })

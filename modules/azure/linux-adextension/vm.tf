@@ -1,3 +1,13 @@
+resource "azurerm_key_vault "breakglass_admin_keys" {
+  name                = lower("kv-("${var.vm_config.name}")-bg")
+  location            = var.vm_config.location
+  resource_group_name = var.rg_name
+  sku_name            = "standard"
+  tenant_id           = var.
+#  purge_protection_enabled    = true #activate in prod only
+  soft_delete_retention_days  = 90
+}
+
 resource "tls_private_key" "ssh_admin_key" {
   algorithm = "RSA"
   rsa_bits  = "4096"
