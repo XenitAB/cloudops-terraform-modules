@@ -1,0 +1,83 @@
+name: Update terraform dependencies
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * *"
+jobs:
+  tf-latest-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup tf-latest-version
+        env:
+          TF_LATEST_VERSION_VERSION: "0.1.1"
+          TF_LATEST_VERSION_SHA: "e36355a163a69a8fff9e4bf946db33171e7e085d6d33647353ab128b903e2c3d"
+        run: |
+          set -e
+          wget https://github.com/XenitAB/tf-latest-version/releases/download/v${TF_LATEST_VERSION_VERSION}/tf-latest-version_${TF_LATEST_VERSION_VERSION}_linux_amd64.tar.gz
+          DOWNLOAD_TF_LATEST_VERSION_SHA=$(openssl sha1 -sha256 tf-latest-version_${TF_LATEST_VERSION_VERSION}_linux_amd64.tar.gz | awk '{print $2}')
+          if [[ "${TF_LATEST_VERSION_SHA}" != "${DOWNLOAD_TF_LATEST_VERSION_SHA}" ]]; then
+              echo "Downloaded checksum (${DOWNLOAD_TF_LATEST_VERSION_SHA}) for tf-latest-version does not match expected value: ${TF_LATEST_VERSION_SHA}"
+              exit 1
+          fi
+          tar xzvf tf-latest-version_${TF_LATEST_VERSION_VERSION}_linux_amd64.tar.gz
+          rm tf-latest-version_${TF_LATEST_VERSION_VERSION}_linux_amd64.tar.gz
+          mkdir -p ~/.local/bin/
+          mv ./tf-latest-version ~/.local/bin/tf-latest-version
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Run tf-latest-version
+        id: update
+        run: |
+          set -xe
+          export PATH=${PATH}:~/.local/bin
+          RESULT=$(tf-latest-version --path ./)
+          # Needed as set-output truncates multiline strings
+          # https://github.community/t/set-output-truncates-multiline-strings/16852/4
+          RESULT="${RESULT//'%'/'%25'}"
+          RESULT="${RESULT//$'\n'/'%0A'}"
+          RESULT="${RESULT//$'\r'/'%0D'}"
+          echo "::set-output name=pr_body::$RESULT"
+
+      - name: Setup terraform-docs
+        env:
+          TERRAFORM_DOCS_VERSION: "v0.16.0"
+          TERRAFORM_DOCS_SHA: "328c16cd6552b3b5c4686b8d945a2e2e18d2b8145b6b66129cd5491840010182"
+        run: |
+          wget https://github.com/terraform-docs/terraform-docs/releases/download/${TERRAFORM_DOCS_VERSION}/terraform-docs-${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz
+          DOWNLOAD_TERRAFORM_DOCS_SHA=$(openssl sha1 -sha256 terraform-docs-${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz | awk '{print $2}')
+          if [[ "${TERRAFORM_DOCS_SHA}" != "${DOWNLOAD_TERRAFORM_DOCS_SHA}" ]]; then
+              echo "Downloaded checksum (${DOWNLOAD_TERRAFORM_DOCS_SHA}) for terraform-docs does not match expected value: ${TERRAFORM_DOCS_SHA}"
+              exit 1
+          fi
+          tar xzvf terraform-docs-${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz terraform-docs
+          rm terraform-docs-${TERRAFORM_DOCS_VERSION}-linux-amd64.tar.gz
+          mkdir -p ~/.local/bin/
+          mv ./terraform-docs ~/.local/bin/terraform-docs
+
+      - name: Run docs
+        run: |
+          export PATH=${PATH}:~/.local/bin
+          make docs
+
+      - name: Generate token
+        uses: tibdex/github-app-token@v1
+        id: generate_token
+        with:
+          app_id: ${{ secrets.GH_ACTION_APP_ID }}
+          private_key: ${{ secrets.GH_ACTION_APP_PRIVATE_KEY }}
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ steps.generate_token.outputs.token }}
+          committer: GitHub <noreply@github.com>
+          commit-message: Update versions
+          title: Update Terraform Provider and Helm Chart versions
+          body: |
+            ${{ steps.update.outputs.pr_body }}
+          delete-branch: true
+          branch: update/terraform-versions
+          labels: |
+            automation
