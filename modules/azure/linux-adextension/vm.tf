@@ -4,7 +4,7 @@ resource "azurerm_key_vault "breakglass_admin_keys" {
   resource_group_name = var.rg_name
   sku_name            = "standard"
   tenant_id           = var.
-#  purge_protection_enabled    = true #activate in prod only
+#  purge_protection_enabled    = false #set to true and activate when deploy in prod
   soft_delete_retention_days  = 90
 }
 
