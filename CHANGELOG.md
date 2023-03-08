@@ -9,4 +9,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - [#2](https://github.com/XenitAB/cloudops-terraform-modules/pull/2) Refactor module to work with Make.
-- [#1](https://github.com/XenitAB/cloudops-terraform-modules/pull/1) Initial setup of linux VM aad integration and basic CI solution.
+
