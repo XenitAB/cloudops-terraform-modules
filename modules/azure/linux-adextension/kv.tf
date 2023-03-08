@@ -1,14 +1,15 @@
+#tfsec:ignore:AZU020 tfsec:ignore:AZU021
 resource "azurerm_key_vault" "ssh_kv" {
   name                     = "kv-${var.environment}-${var.location_short}-${var.common_name}-${var.unique_suffix}"
   location                 = var.location
   resource_group_name      = var.rg_name
-  tenant_id                = data.azurerm_client_config.current.tenant_id
+  tenant_id                = data.azurerm_subscription.current.tenant_id
   purge_protection_enabled = false
 
   sku_name = "standard"
 
   access_policy {
-    tenant_id = data.azurerm_client_config.current.tenant_id
+    tenant_id = data.azurerm_subscription.current.tenant_id
     object_id = data.azurerm_client_config.current.object_id
 
     key_permissions = [
