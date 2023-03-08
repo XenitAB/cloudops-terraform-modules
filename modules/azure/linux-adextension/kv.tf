@@ -67,8 +67,8 @@ resource "tls_private_key" "ssh_admin_key" {
 
 #tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "ssh_admin_key_secret" {
-  count        = var.count
-  name         = lower("${var.vm_config.name}-private-ssh-${format("%02s", count.index + 1)}")
+  count        = var.vm_count
+  name         = "private-ssh-${var.common_name}-${format("%02s", count.index + 1)}"
   value        = trimspace(tls_private_key.ssh_admin_key.private_key_openssh)
   key_vault_id = azurerm_key_vault.ssh_kv.id
   content_type = "x509 string"

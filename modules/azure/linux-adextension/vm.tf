@@ -1,7 +1,7 @@
 
 resource "azurerm_linux_virtual_machine" "vm" {
-  count                           = var.count
-  name                            = "vm-${var.environment}-${var.location_short}-${var.common_name}-${format("%02s", count.index + 1)}")
+  count                           = var.vm_count
+  name                            = "vm-${var.environment}-${var.location_short}-${var.common_name}-${format("%02s", count.index + 1)}"
   location                        = var.location
   resource_group_name             = var.rg_name
   size                            = var.vm_config.size

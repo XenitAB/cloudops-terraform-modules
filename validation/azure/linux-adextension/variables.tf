@@ -31,6 +31,7 @@ variable "vm_count" {
 variable "vm_config" {
   description = "Configuration of the virtual machines"
   type = object({
+    name                 = string
     username             = string
     size                 = string
     publisher            = string
