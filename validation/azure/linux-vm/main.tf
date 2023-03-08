@@ -1,8 +1,6 @@
 module "linux_adextension" {
   source = "../../../modules/azure/linux-vm"
 
-  unique_suffix  = "1234"
-  common_name    = "test"
   location_short = "we"
   location       = "test"
   environment    = "test"
