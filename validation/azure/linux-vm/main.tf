@@ -8,7 +8,7 @@ module "linux_adextension" {
 
   vm_config = [
     {
-      name                 = "vm-01"
+      vm_name              = "vm-01"
       size                 = "test"
       publisher            = "test"
       offer                = "test"
@@ -27,7 +27,7 @@ module "linux_adextension" {
       ip_config_name       = "test"
     },
     {
-      name                 = "vm-02"
+      vm_name              = "vm-02"
       size                 = "test"
       publisher            = "test"
       offer                = "test"

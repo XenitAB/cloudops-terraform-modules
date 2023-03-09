@@ -19,7 +19,7 @@ variable "vm_config" {
   description = "Configuration of the virtual machines"
   type = list(
     object({
-      name                 = string
+      vm_name              = string
       username             = string
       size                 = string
       publisher            = string
