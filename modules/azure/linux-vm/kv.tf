@@ -14,7 +14,7 @@ resource "azurerm_key_vault_secret" "ssh_admin_key_secret" {
     for name in var.vm_config :
     vm_config.name => name
   }
-  name         = var.vm_config[each.key].key_vault_name
+  name         = var.vm_config[each.key].ssh_key_name
   value        = trimspace(tls_private_key.ssh_admin_key[each.key].private_key_openssh)
   key_vault_id = var.vm_config[each.key].key_vault_id
   content_type = "x509 string"
