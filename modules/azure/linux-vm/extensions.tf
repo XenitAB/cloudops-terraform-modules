@@ -39,28 +39,20 @@ resource "azuread_group" "group_users" {
 }
 
 resource "azurerm_role_assignment" "role_admin" {
-<<<<<<< HEAD
   for_each = {
     for vm in var.vm_config :
     vm.vm_name => vm
   }
-=======
-
->>>>>>> creation of AD-extension in extensions.tf
   scope                = data.azurerm_resource_group.rg.id
   role_definition_name = "Virtual Machine Administrator Login"
   principal_id         = azuread_group.group_admins.id
 }
 
 resource "azurerm_role_assignment" "role_user" {
-<<<<<<< HEAD
   for_each = {
     for vm in var.vm_config :
     vm.vm_name => vm
   }
-=======
-
->>>>>>> creation of AD-extension in extensions.tf
   scope                = data.azurerm_resource_group.rg.id
   role_definition_name = "Virtual Machine User Login"
   principal_id         = azuread_group.group_users.id
