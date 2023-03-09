@@ -1,15 +1,15 @@
 resource "azurerm_network_interface" "nic" {
   for_each = {
-    for name in var.vm_config :
-    name.vm_config => name
+    for vm in var.vm_config :
+    vm.vm_name => vm
   }
-  name                = "nic-${each.value.vm_config.name}"
+  name                = "nic-${var.environment}-${var.location_short}-${each.value.vm_name}"
   location            = var.location
-  resource_group_name = var.vm_config[each.key].rg_name
+  resource_group_name = each.value.rg_name
 
   ip_configuration {
-    name                          = "private-ip-${each.value.vm_config.name}"
-    subnet_id                     = var.vm_config[each.key].subnet_id
+    name                          = "ipconfig-${var.environment}-${var.location_short}-${each.value.vm_name}"
+    subnet_id                     = each.value.subnet_id
     private_ip_address_allocation = "Dynamic"
   }
 }

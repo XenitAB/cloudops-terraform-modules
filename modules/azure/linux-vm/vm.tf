@@ -1,18 +1,18 @@
 
 resource "azurerm_linux_virtual_machine" "vm" {
   for_each = {
-    for name in var.vm_config :
-    name.vm_config => name
+    for vm in var.vm_config :
+    vm.vm_name => vm
   }
-  name                            = "vm-${var.environment}-${var.location_short}-${each.value.vm_config.name}"
+  name                            = "vm-${var.environment}-${var.location_short}-${each.value.vm_name}"
   location                        = var.location
-  resource_group_name             = var.vm_config[each.key].rg_name
-  size                            = var.vm_config[each.key].size
-  admin_username                  = var.vm_config[each.key].username
+  resource_group_name             = each.value.rg_name
+  size                            = each.value.size
+  admin_username                  = each.value.username
   disable_password_authentication = true
   admin_ssh_key {
     public_key = tls_private_key.ssh_admin_key[each.key].public_key_openssh
-    username   = var.vm_config[each.key].username
+    username   = each.value.username
   }
 
   network_interface_ids = [
@@ -24,16 +24,16 @@ resource "azurerm_linux_virtual_machine" "vm" {
   }
 
   source_image_reference {
-    publisher = var.vm_config[each.key].publisher
-    offer     = var.vm_config[each.key].offer
-    sku       = var.vm_config[each.key].sku
-    version   = var.vm_config[each.key].version
+    publisher = each.value.publisher
+    offer     = each.value.offer
+    sku       = each.value.sku
+    version   = each.value.version
   }
 
   os_disk {
-    caching              = var.vm_config[each.key].caching
-    storage_account_type = var.vm_config[each.key].storage_account_type
-    disk_size_gb         = var.vm_config[each.key].disk_size_gb
+    caching              = each.value.caching
+    storage_account_type = each.value.storage_account_type
+    disk_size_gb         = each.value.disk_size_gb
   }
 
 }

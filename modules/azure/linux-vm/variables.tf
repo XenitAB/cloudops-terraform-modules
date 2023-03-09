@@ -19,7 +19,7 @@ variable "vm_config" {
   description = "Configuration of the virtual machines"
   type = list(
     object({
-      name                 = string
+      vm_name              = string
       username             = string
       size                 = string
       publisher            = string
@@ -29,10 +29,12 @@ variable "vm_config" {
       caching              = string
       disk_size_gb         = optional(string)
       storage_account_type = string
+      rg_name              = string
       nic_name             = string
       subnet_id            = string
-      rg_name              = string
+      ip_config_name       = string
       key_vault_id         = string
+      ssh_key_name         = string
     })
   )
 }
