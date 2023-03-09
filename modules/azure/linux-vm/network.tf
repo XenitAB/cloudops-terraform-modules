@@ -1,7 +1,7 @@
 resource "azurerm_network_interface" "nic" {
   for_each = {
     for name in var.vm_config :
-    name.vm_config => name
+    vm_config.name => name
   }
   name                = "nic-${each.value.vm_config.name}"
   location            = var.location

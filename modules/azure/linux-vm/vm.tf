@@ -2,7 +2,7 @@
 resource "azurerm_linux_virtual_machine" "vm" {
   for_each = {
     for name in var.vm_config :
-    name.vm_config => name
+    vm_config.name => name
   }
   name                            = "vm-${var.environment}-${var.location_short}-${each.value.vm_config.name}"
   location                        = var.location
