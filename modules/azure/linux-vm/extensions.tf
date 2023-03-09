@@ -27,17 +27,17 @@ resource "azuread_group" "group_users" {
   security_enabled = true
 }
 
-resource "azurerm_role_assignment" "admin" {
+resource "azurerm_role_assignment" "role_admin" {
 
   scope                = data.azurerm_resource_group.rg.id
   role_definition_name = "Virtual Machine Administrator Login"
-  principal_id         = azuread_group.prtlwrk_admin.id
+  principal_id         = azuread_group.group_admins.id
 }
 
-resource "azurerm_role_assignment" "user" {
+resource "azurerm_role_assignment" "role_user" {
 
   scope                = data.azurerm_resource_group.rg.id
   role_definition_name = "Virtual Machine User Login"
-  principal_id         = azuread_group.prtlwrk_user.id
+  principal_id         = azuread_group.group_users.id
 }
 
