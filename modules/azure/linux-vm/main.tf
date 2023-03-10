@@ -25,3 +25,4 @@ data "azuread_users" "adgroup_owners" {
   
 } 
 
+# ad_group_owners = ["user.name@example.com", "user.name_2@example_2.com"]
