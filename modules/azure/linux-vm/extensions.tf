@@ -16,6 +16,8 @@ resource "azurerm_virtual_machine_extension" "aad_ssh_login_for_linux" {
   type                 = "AADSSHLoginForLinux"
   type_handler_version = "1.0"
 
+}
+
 resource "azuread_group" "group_admins" {
   for_each = {
     for vm in var.vm_config :
