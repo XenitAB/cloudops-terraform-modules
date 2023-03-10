@@ -14,7 +14,6 @@ variable "environment" {
   type        = string
 }
 
-
 variable "vm_config" {
   description = "Configuration of the virtual machines"
   type = list(
@@ -37,4 +36,9 @@ variable "vm_config" {
       ssh_key_name         = string
     })
   )
+}
+
+variable "ad_group_owners_list" {
+  description = "A list of owners for the AD-group that allows Linux VM admin access"
+  type        = list()
 }
