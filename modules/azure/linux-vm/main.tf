@@ -19,3 +19,9 @@ terraform {
     }
   }
 }
+
+data "azuread_users" "adgroup_owners" {
+  user_principal_names = var.adgroup_owners
+  
+} 
+
