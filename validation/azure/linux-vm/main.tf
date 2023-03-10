@@ -16,7 +16,7 @@ module "linux_adextension" {
       version              = "test"
       caching              = "test"
       storage_account_type = "SSD"
-      disk_size_gb         = 128
+      disk_size_gb         = 64
       username             = "localadmin"
       nic_name             = "vm-nic"
       location             = "West Europe"
@@ -35,11 +35,11 @@ module "linux_adextension" {
       version              = "test"
       caching              = "test"
       storage_account_type = "SSD"
-      disk_size_gb         = 128
+      disk_size_gb         = 64
       username             = "localadmin"
       nic_name             = "vm-nic"
       location             = "West Europe"
-      rg_name              = "rg-dev-we-linux"
+      rg_name              = "rg-qa-we-linux"
       subnet_id            = "value"
       key_vault_id         = "test"
       ssh_key_name         = "test"
