@@ -1,10 +1,4 @@
 
-#      ad_group_owners = ["user.name@example.com", "user.name_2@example_2.com"]
-
-#      ad_group_owners = ["user.name@example.com", "user.name_2@example_2.com"]
-
-#      ad_group_owners = ["user.name@example.com", "user.name_2@example_2.com"]
-
 # To get the type handler version run
 # az vm extension image list --location westeurope --output table
 resource "azurerm_virtual_machine_extension" "aad_ssh_login_for_linux" {
