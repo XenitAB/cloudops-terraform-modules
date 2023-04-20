@@ -36,7 +36,7 @@ variable "vm_config" {
   )
 }
 
-variable "ad_group_owners_list" {
+variable "ad_group_owners" {
   description = "A list of owners for the AD-group that allows Linux VM admin access"
   type        = list(string)
 }
