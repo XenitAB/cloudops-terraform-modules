@@ -38,5 +38,5 @@ variable "vm_config" {
 
 variable "ad_group_owners_list" {
   description = "A list of owners for the AD-group that allows Linux VM admin access"
-  type        = list()
+  type        = list(string)
 }
