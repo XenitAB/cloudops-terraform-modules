@@ -33,7 +33,6 @@ variable "vm_config" {
       subnet_id            = string
       ip_config_name       = string
       key_vault_id         = string
-      ssh_key_name         = string
     })
   )
 }
