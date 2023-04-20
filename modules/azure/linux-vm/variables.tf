@@ -31,7 +31,6 @@ variable "vm_config" {
       rg_name              = string
       nic_name             = string
       subnet_id            = string
-      ip_config_name       = string
       key_vault_id         = string
     })
   )

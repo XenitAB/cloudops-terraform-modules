@@ -23,7 +23,6 @@ module "linux_adextension" {
       rg_name              = "rg-dev-we-linux"
       subnet_id            = "value"
       key_vault_id         = "test"
-      ip_config_name       = "test"
     },
     {
       vm_name              = "vm-02"
@@ -41,7 +40,6 @@ module "linux_adextension" {
       rg_name              = "rg-qa-we-linux"
       subnet_id            = "value"
       key_vault_id         = "test"
-      ip_config_name       = "test"
     },
   ]
 
