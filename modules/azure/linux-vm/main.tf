@@ -20,9 +20,11 @@ terraform {
   }
 }
 
-data "azuread_users" "adgroup_owners" {
-  user_principal_names = var.adgroup_owners
-  
+data "azurerm_resource_group" "rg" {
+  name = var.rg_name
 } 
 
+data "azuread_users" "ad_group_owners" {
+  user_principal_names = var.ad_group_owners
 # ad_group_owners = ["user.name@example.com", "user.name_2@example_2.com"]
+}

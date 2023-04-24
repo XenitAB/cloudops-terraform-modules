@@ -15,40 +15,24 @@ resource "azurerm_virtual_machine_extension" "aad_ssh_login_for_linux" {
 }
 
 resource "azuread_group" "group_admins" {
-  for_each = {
-    for vm in var.vm_config :
-    vm.vm_name => vm
-  }
-  display_name     = lower("SEC-VM-${local.vm_base_name}-ADMIN")
-  owners           = data.azuread_users.adgroup_owners.object_ids
+  display_name     = "sec-${var.rg_name}-vmadmin"
+  owners           = data.azuread_users.ad_group_owners.object_ids
   security_enabled = true
 }
 
 resource "azuread_group" "group_users" {
-  for_each = {
-    for vm in var.vm_config :
-    vm.vm_name => vm
-  }
-  display_name     = lower("SEC-VM-${local.vm_base_name}-USER")
-  owners           = data.azuread_users.adgroup_owners.object_ids
+  display_name     = "sec-${var.rg_name}-vmuser"
+  owners           = data.azuread_users.ad_group_owners.object_ids
   security_enabled = true
 }
 
 resource "azurerm_role_assignment" "role_admin" {
-  for_each = {
-    for vm in var.vm_config :
-    vm.vm_name => vm
-  }
   scope                = data.azurerm_resource_group.rg.id
   role_definition_name = "Virtual Machine Administrator Login"
   principal_id         = azuread_group.group_admins.id
 }
 
 resource "azurerm_role_assignment" "role_user" {
-  for_each = {
-    for vm in var.vm_config :
-    vm.vm_name => vm
-  }
   scope                = data.azurerm_resource_group.rg.id
   role_definition_name = "Virtual Machine User Login"
   principal_id         = azuread_group.group_users.id

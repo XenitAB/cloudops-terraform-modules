@@ -13,6 +13,10 @@ variable "environment" {
   description = "The environment name to use for the deploy"
   type        = string
 }
+variable "rg_name" {
+  description = "The workload resource group"
+  type        = string
+}
 
 variable "vm_config" {
   description = "Configuration of the virtual machines"
