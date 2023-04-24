@@ -5,7 +5,7 @@ resource "azurerm_network_interface" "nic" {
   }
   name                = "nic-${var.environment}-${var.location_short}-${each.value.vm_name}"
   location            = var.location
-  resource_group_name = each.value.rg_name
+  resource_group_name = var.rg_name
 
   ip_configuration {
     name                          = "ipconfig-${var.environment}-${var.location_short}-${each.value.vm_name}"

@@ -32,7 +32,6 @@ variable "vm_config" {
       caching              = string
       disk_size_gb         = optional(string)
       storage_account_type = string
-      rg_name              = string
       nic_name             = string
       subnet_id            = string
       key_vault_id         = string
