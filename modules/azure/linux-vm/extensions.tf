@@ -1,4 +1,3 @@
-
 # To get the type handler version run
 # az vm extension image list --location westeurope --output table
 resource "azurerm_virtual_machine_extension" "aad_ssh_login_for_linux" {
