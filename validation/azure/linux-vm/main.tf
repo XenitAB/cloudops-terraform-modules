@@ -1,11 +1,11 @@
 module "linux_adextension" {
   source = "../../../modules/azure/linux-vm"
 
-  location_short = "we"
-  location       = "test"
-  environment    = "test"
-
-
+  location_short  = "we"
+  location        = "test"
+  environment     = "test"
+  rg_name         = "test"
+  ad_group_owners = ["owner.user@example.com"]
   vm_config = [
     {
       vm_name              = "vm-01"
@@ -16,16 +16,13 @@ module "linux_adextension" {
       version              = "test"
       caching              = "test"
       storage_account_type = "SSD"
-      disk_size_gb         = 128
+      disk_size_gb         = 64
       username             = "localadmin"
       nic_name             = "vm-nic"
-      location             = "West Europe"
-      rg_name              = "rg-dev-we-linux"
       subnet_id            = "value"
       key_vault_id         = "test"
-      ssh_key_name         = "test"
-      ip_config_name       = "test"
     },
+
     {
       vm_name              = "vm-02"
       size                 = "test"
@@ -35,15 +32,11 @@ module "linux_adextension" {
       version              = "test"
       caching              = "test"
       storage_account_type = "SSD"
-      disk_size_gb         = 128
+      disk_size_gb         = 64
       username             = "localadmin"
       nic_name             = "vm-nic"
-      location             = "West Europe"
-      rg_name              = "rg-dev-we-linux"
       subnet_id            = "value"
       key_vault_id         = "test"
-      ssh_key_name         = "test"
-      ip_config_name       = "test"
     },
   ]
 

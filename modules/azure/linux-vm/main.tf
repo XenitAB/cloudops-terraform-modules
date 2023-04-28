@@ -19,3 +19,12 @@ terraform {
     }
   }
 }
+
+data "azurerm_resource_group" "rg" {
+  name = var.rg_name
+}
+
+# ad_group_owners = ["user.name@example.com", "user.name_2@example_2.com"]
+data "azuread_users" "ad_group_owners" {
+  user_principal_names = var.ad_group_owners
+}

@@ -13,7 +13,10 @@ variable "environment" {
   description = "The environment name to use for the deploy"
   type        = string
 }
-
+variable "rg_name" {
+  description = "The workload resource group"
+  type        = string
+}
 
 variable "vm_config" {
   description = "Configuration of the virtual machines"
@@ -29,12 +32,14 @@ variable "vm_config" {
       caching              = string
       disk_size_gb         = optional(string)
       storage_account_type = string
-      rg_name              = string
       nic_name             = string
       subnet_id            = string
-      ip_config_name       = string
       key_vault_id         = string
-      ssh_key_name         = string
     })
   )
+}
+
+variable "ad_group_owners" {
+  description = "A list of owners for the AD-group that allows Linux VM admin access"
+  type        = list(string)
 }
