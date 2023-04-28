@@ -21,8 +21,8 @@ module "linux_adextension" {
       nic_name             = "vm-nic"
       subnet_id            = "value"
       key_vault_id         = "test"
-
     },
+
     {
       vm_name              = "vm-02"
       size                 = "test"
