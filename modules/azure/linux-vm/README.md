@@ -3,17 +3,17 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 1.3.0 |
-| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.38.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.54.0 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | 3.5.1 |
-| <a name="requirement_tls"></a> [tls](#requirement\_tls) | 4.0.4 |
+| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | 2.47.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 3.97.1 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | 3.6.0 |
+| <a name="requirement_tls"></a> [tls](#requirement\_tls) | 4.0.5 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.54.0 |
-| <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.4 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.97.1 |
+| <a name="provider_tls"></a> [tls](#provider\_tls) | 4.0.5 |
 
 ## Modules
 
@@ -23,10 +23,10 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azurerm_key_vault_secret.ssh_admin_key_secret](https://registry.terraform.io/providers/hashicorp/azurerm/3.54.0/docs/resources/key_vault_secret) | resource |
-| [azurerm_linux_virtual_machine.vm](https://registry.terraform.io/providers/hashicorp/azurerm/3.54.0/docs/resources/linux_virtual_machine) | resource |
-| [azurerm_network_interface.nic](https://registry.terraform.io/providers/hashicorp/azurerm/3.54.0/docs/resources/network_interface) | resource |
-| [tls_private_key.ssh_admin_key](https://registry.terraform.io/providers/hashicorp/tls/4.0.4/docs/resources/private_key) | resource |
+| [azurerm_key_vault_secret.ssh_admin_key_secret](https://registry.terraform.io/providers/hashicorp/azurerm/3.97.1/docs/resources/key_vault_secret) | resource |
+| [azurerm_linux_virtual_machine.vm](https://registry.terraform.io/providers/hashicorp/azurerm/3.97.1/docs/resources/linux_virtual_machine) | resource |
+| [azurerm_network_interface.nic](https://registry.terraform.io/providers/hashicorp/azurerm/3.97.1/docs/resources/network_interface) | resource |
+| [tls_private_key.ssh_admin_key](https://registry.terraform.io/providers/hashicorp/tls/4.0.5/docs/resources/private_key) | resource |
 
 ## Inputs
 
